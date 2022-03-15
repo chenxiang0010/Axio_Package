@@ -4,7 +4,7 @@ export interface InterceptorHooks {
   requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
   requestInterceptorCatch?: (error: any) => any
 
-  responseInterceptor?: <T = AxiosResponse> (response: T) => T
+  responseInterceptor?: (response: AxiosResponse) => AxiosResponse
   responseInterceptorCatch?: (error: any) => any
 }
 
