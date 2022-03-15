@@ -14,8 +14,8 @@ const request = new MyRequest({
       return config
     },
     requestInterceptorCatch: (error: any) => error,
-    responseInterceptor: res => res,
-    responseInterceptorCatch: (error: any) => error
+    responseInterceptor: res => res.data,
+    responseInterceptorCatch: (error: any) => error.response.data
   }
 })
 
