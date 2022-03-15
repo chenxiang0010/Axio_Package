@@ -5,7 +5,8 @@ import { LoadingOptionsResolved } from 'element-plus/lib/components'
 import type {
   RequestConfig,
   InterceptorHooks,
-  CancelRequestSource
+  CancelRequestSource,
+  ResultData
 } from './types'
 
 
@@ -57,7 +58,7 @@ class MyRequest {
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
         this.loading?.closed()
-        return res.data
+        return res
       },
       (error: any) => {
         this.loading?.closed()
@@ -110,7 +111,6 @@ class MyRequest {
     if (!config.showLoading) {
       this.showLoading = false
     }
-    // @ts-ignore
     return new Promise((resolve, reject) => {
       // 如果我们为单个请求设置拦截器，这里使用单个请求的拦截器
       if (config.interceptorHooks?.requestInterceptor) {
@@ -127,12 +127,14 @@ class MyRequest {
         })
       }
       this.instance
-        .request<any, T>(config)
+        .request<any, ResultData<T>>(config)
         .then((res) => {
           // 如果我们为单个响应设置拦截器，这里使用单个响应的拦截器
           if (config.interceptorHooks?.responseInterceptor) {
+            // @ts-ignore
             res = config.interceptorHooks.responseInterceptor<T>(res)
           }
+        // @ts-ignore
           resolve(res)
           this.showLoading = true
         })
@@ -140,7 +142,6 @@ class MyRequest {
           reject(error)
           this.showLoading = true
         })
-        // @ts-ignore
         .finally(() => {
           url && this.delUrl(url)
         })
