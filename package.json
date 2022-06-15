@@ -1,0 +1,16 @@
+{
+  "name": "Axio-Package",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:chenxiang0010/Axio_Package.git",
+  "author": "chenxiang0010 <chenxiang0010@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "i": "npm install"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "element-plus": "^2.1.2",
+    "typescript": "^4.6.2"
+  }
+}

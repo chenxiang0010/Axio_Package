@@ -57,10 +57,12 @@ class MyRequest {
     // 全局响应拦截器保证最后执行
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
+        // @ts-ignore
         this.loading?.closed()
         return res
       },
       (error: any) => {
+        // @ts-ignore
         this.loading?.closed()
         return error
       })
